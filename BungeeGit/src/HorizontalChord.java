@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.ArrayList;
 
 import org.opensourcephysics.frames.PlotFrame;
