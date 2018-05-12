@@ -2,7 +2,7 @@
 import org.opensourcephysics.display.Circle;
 
 public class Coordinate extends Circle{
-
+//comment to test if i can do git work outside of eclipse
 	public Coordinate(double x, double y) {
 		this.setXY(x, y);
 	}
