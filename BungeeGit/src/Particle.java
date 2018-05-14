@@ -62,5 +62,5 @@ public class Particle extends Coordinate{
 
 	public void updateTrail() {
 		trl.addPoint(this.getX(), this.getY());
-	}
+	}//please work im not quite sure how to do this
 }
