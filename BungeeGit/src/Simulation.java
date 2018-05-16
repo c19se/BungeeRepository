@@ -17,8 +17,8 @@ import org.opensourcephysics.frames.*;   //needed to use a DisplayFrame
  * recommended when running our simulation
  *
  */
-public class SimulationChord extends AbstractSimulation {
-	public SimulationChord() {
+public class Simulation extends AbstractSimulation {
+	public Simulation() {
 
 	}
 	int i = 0;
@@ -113,7 +113,7 @@ public class SimulationChord extends AbstractSimulation {
 
 	public static void main(String[] args) {
 		//Creating a new simulation 
-		SimulationControl.createApp(new SimulationChord());
+		SimulationControl.createApp(new Simulation());
 
 	}
 }
