@@ -108,7 +108,7 @@ public class Simulation extends AbstractSimulation {
 		//clears everything from the frame again 
 		xyFrame.clearData();
 		//initializes our bungee cord 
-		cord = new Chord(numSprings, length/numSprings, k, mass/numSprings, timeStep, xyFrame, x, y, amplitudeConstant, frequency);
+		cord = new Chord("String", numSprings, length/numSprings, k, mass/numSprings, timeStep, xyFrame, x, y, amplitudeConstant, frequency);
 	}
 
 	public static void main(String[] args) {
