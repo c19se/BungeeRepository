@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 import org.opensourcephysics.frames.PlotFrame;
 //myhe he he
-public class HorizontalChord {
+public class Chord {
 	//another rounding function for the bungee class:
 	public double round (double value, int precision) {
 		int scale = (int) Math.pow(10, precision+3);
@@ -27,7 +27,7 @@ public class HorizontalChord {
 	double amplitude;
 	double frequency;
 	//our constructor:
-	public HorizontalChord(double numSprings, double length, double K, double springMass, double timeStep, PlotFrame pFrame, double x, double y, double amplitude, double frequency) {//mass is the mass of each individual spring. Not really tho, the particles next to each. Same ish wit da K
+	public Chord(double numSprings, double length, double K, double springMass, double timeStep, PlotFrame pFrame, double x, double y, double amplitude, double frequency) {//mass is the mass of each individual spring. Not really tho, the particles next to each. Same ish wit da K
 
 		Double d = length;
 

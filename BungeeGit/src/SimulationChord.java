@@ -30,7 +30,7 @@ public class SimulationChord extends AbstractSimulation {
 	double timeStep;
 	PlotFrame xyFrame = new PlotFrame("x", "y", "Trajectory");
 	//	PlotFrame aFrame = new PlotFrame("x", "y", "Trajectory"); //this frame plots the acceleration of the person at any given time 
-	HorizontalChord cord;
+	Chord cord;
 	int j = 0;
 
 	//our doStep function which runs until told otherwise:
@@ -108,7 +108,7 @@ public class SimulationChord extends AbstractSimulation {
 		//clears everything from the frame again 
 		xyFrame.clearData();
 		//initializes our bungee cord 
-		cord = new HorizontalChord(numSprings, length/numSprings, k, mass/numSprings, timeStep, xyFrame, x, y, amplitudeConstant, frequency);
+		cord = new Chord(numSprings, length/numSprings, k, mass/numSprings, timeStep, xyFrame, x, y, amplitudeConstant, frequency);
 	}
 
 	public static void main(String[] args) {
