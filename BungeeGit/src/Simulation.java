@@ -54,6 +54,7 @@ public class Simulation extends AbstractSimulation {
 		control.setValue("amplitude", .1);
 //		control.setValue("frequency", 314.159265359);
 		control.setValue("tension", 100);
+		control.setValue("shape", "circle");
 
 		xyFrame.clearData();
 		this.setDelayTime(1);
@@ -71,6 +72,7 @@ public class Simulation extends AbstractSimulation {
 	double amplitudeConstant;
 	double frequency;
 	double tension;
+	String shape;
 
 	//our initialize function
 	public void initialize() {
@@ -86,6 +88,8 @@ public class Simulation extends AbstractSimulation {
 //		frequency = control.getDouble("frequency");
 		k = tension/(length/numSprings);
 		frequency = Math.sqrt(tension*length/mass)/(2*length);
+		shape = control.getString("shape");
+		
 		
 		
 
@@ -108,7 +112,7 @@ public class Simulation extends AbstractSimulation {
 		//clears everything from the frame again 
 		xyFrame.clearData();
 		//initializes our bungee cord 
-		cord = new Chord("String", numSprings, length/numSprings, k, mass/numSprings, timeStep, xyFrame, x, y, amplitudeConstant, frequency);
+		cord = new Chord(shape, numSprings, length/numSprings, k, mass/numSprings, timeStep, xyFrame, x, y, amplitudeConstant, frequency);
 	}
 
 	public static void main(String[] args) {
