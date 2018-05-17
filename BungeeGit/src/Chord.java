@@ -88,7 +88,7 @@ public class Chord {
 			System.out.println(this.numSprings);
 			
 			
-			for(int i = 0; i > this.numSprings; i++) {
+			for(int i = 0; i < this.numSprings; i++) {
 				System.out.println("BOII");
 				xx = Math.cos(i*theta)*radius;
 				yy = Math.sin(i*theta)*radius;
