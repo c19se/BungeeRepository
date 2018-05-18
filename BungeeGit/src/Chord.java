@@ -26,9 +26,11 @@ public class Chord {
 	boolean slack = true; //tests to see if the bungee cord that not fallen yet and has "slack"
 	double amplitude;
 	double frequency;
+	
+	String shape;
 	//our constructor:
 	public Chord(String shape, double numSprings, double length, double K, double springMass, double timeStep, PlotFrame pFrame, double x, double y, double amplitude, double frequency) {//mass is the mass of each individual spring. Not really tho, the particles next to each. Same ish wit da K
-
+		this.shape = shape;
 		if(shape.equals("String")){
 			Double d = length;
 
@@ -62,8 +64,9 @@ public class Chord {
 		}
 		
 		else if(shape.toLowerCase().equals("circle")){
+		
 			Double d = length*numSprings;
-;			double radius = d/Math.PI/2;
+			double radius = d/Math.PI/2;
 			//finds the specified precision based on the user input, type: string
 			String[] splitter = d.toString().split("\\.");	
 			this.precision = splitter[1].length(); 
@@ -112,7 +115,7 @@ public class Chord {
 	//next update function updates all of the particles
 	public void updateParticles() {
 		//		Masses.get(0).setY(Math.sin(2 * Math.PI*frequency*time)*amplitude);
-		if(continueMoving)
+		if(continueMoving||shape.toLowerCase().equals("circle"))
 			Masses.get(0).setY(Masses.get(0).yInit + Math.sin(frequency*time)*amplitude);
 		if(roundYurd(Masses.get(0).getY()) == 0) {
 			count++;
