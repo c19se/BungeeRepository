@@ -13,16 +13,19 @@ public class Particle extends Coordinate{
 	double Xv;
 	double Yv;
 
+	double yInit;
+		
 	boolean fixed;
 	//x and y are part of the circle class
 	double timeStep;
 
 	double mass;
-
+	
 	List<Force> forces;
 	public Particle(double mass, double timeStep, double xInit, double yInit) {
 		super(xInit, yInit);
 		this.pixRadius = 3;
+		this.yInit = yInit;
 		this.timeStep = timeStep;
 		this.mass = mass;
 		forces = new ArrayList<Force>();

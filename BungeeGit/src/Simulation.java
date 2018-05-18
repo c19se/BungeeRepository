@@ -51,7 +51,7 @@ public class Simulation extends AbstractSimulation {
 //		control.setValue("K", 1.23e7);
 		control.setValue("Mass of bungee cord", .15);
 		control.setValue("Length of bungee", 1);
-		control.setValue("amplitude", .1);
+		control.setValue("amplitude", .001);
 //		control.setValue("frequency", 314.159265359);
 		control.setValue("tension", 100);
 		control.setValue("shape", "circle");

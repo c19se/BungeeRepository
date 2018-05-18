@@ -50,7 +50,7 @@ public class Chord {
 			Masses.add(new Particle(springMass, timeStep, x, y)); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
 			pFrame.addDrawable(Masses.get(0)); //adds the individual particle
 			pFrame.setVisible(true);
-			for(int i = 0; i < numSprings; i++) {
+			for(int i = 0; i < numSprings-1; i++) {
 				Masses.add(new Particle(springMass, timeStep, x+(i+1)*(length), y)); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
 				pFrame.addDrawable(Masses.get(i)); //adds the individual particle to the frame
 				Spring s = new Spring((length), K, Masses.get(i),Masses.get(i+1)); //creates a new spring to go along with each particle
@@ -62,61 +62,40 @@ public class Chord {
 		}
 		
 		else if(shape.toLowerCase().equals("circle")){
-			System.out.println("made it");
-			double radius = length;
-
+			Double d = length*numSprings;
+;			double radius = d/Math.PI/2;
 			//finds the specified precision based on the user input, type: string
-//			String[] splitter = radius.toString().split("\\.");	
-//			this.precision = splitter[1].length(); 
+			String[] splitter = d.toString().split("\\.");	
+			this.precision = splitter[1].length(); 
 			this.timeStep = timeStep;
 			this.time = 0;
 			this.amplitude = amplitude;
 			this.frequency = frequency;
 			//setting all variables equal to specified parameters:
-			this.startHeight = 0;
+			this.startHeight = y;
 			this.k = K/numSprings;
 			this.numSprings = numSprings;
 			this.mass = springMass * numSprings;
-			this.lengthPerSpring = length*length*Math.PI/this.numSprings;
+			this.lengthPerSpring = length;
 			Masses = new ArrayList<Particle>();
 			Springs = new ArrayList<Spring>();
+			double theta = Math.PI/2;
+			Masses.add(new Particle(springMass, timeStep, x+(radius*Math.cos(theta)), y + (radius*Math.sin(theta)) )); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
+			pFrame.addDrawable(Masses.get(0)); //adds the individual particle
 			
-			double theta = 360/this.numSprings;
-			double xx = 0;
-			double yy = 0;
-			
-			System.out.println(this.numSprings);
-			
-			
-			for(int i = 0; i < this.numSprings; i++) {
-				System.out.println("BOII");
-				xx = Math.cos(i*theta)*radius;
-				yy = Math.sin(i*theta)*radius;
-				
-				Masses.add(new Particle(springMass, timeStep, xx, yy));
-				Springs.add(new Spring((this.lengthPerSpring), K, Masses.get(i), Masses.get(i+1))); //adds the spring to the arrayList of springs 
-				
-				pFrame.addDrawable(Masses.get(i));
+			pFrame.setVisible(true);
+			for(int i = 0; i < numSprings-1; i++) {
+				theta += 2*Math.PI/(numSprings-1);
+				Masses.add(new Particle(springMass, timeStep, x+(radius*Math.cos(theta)), y + (radius*Math.sin(theta)))); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
+				pFrame.addDrawable(Masses.get(i)); //adds the individual particle to the frame
+				Spring s = new Spring((length), K, Masses.get(i),Masses.get(i+1)); //creates a new spring to go along with each particle
+				this.Springs.add(s); //adds the spring to the arrayList of springs 
 			}
-			
-			System.out.println(Masses.size());
-			System.out.println(Springs.size());
-			
-			
-			
-//			Masses.add(new Particle(springMass, timeStep, x, y)); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
-//			pFrame.addDrawable(Masses.get(0)); //adds the individual particle
-//			pFrame.setVisible(true);
-//			for(int i = 0; i < numSprings; i++) {
-//				Masses.add(new Particle(springMass, timeStep, x+(i+1)*(length), y)); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
-//				pFrame.addDrawable(Masses.get(i)); //adds the individual particle to the frame
-//				Spring s = new Spring((length), K, Masses.get(i),Masses.get(i+1)); //creates a new spring to go along with each particle
-//				this.Springs.add(s); //adds the spring to the arrayList of springs 
-//			}
-//			Masses.get(Masses.size()-1).fixed = true;
-//			pFrame.addDrawable(Masses.get(Masses.size()-1));
-//			continueMoving = true;
+			Spring s = new Spring((length), K, Masses.get(Masses.size()-1),Masses.get(0)); //creates a new spring to go along with each particle
+			this.Springs.add(s);
+			continueMoving = true;
 		}
+
 		
 		
 	}
@@ -134,7 +113,7 @@ public class Chord {
 	public void updateParticles() {
 		//		Masses.get(0).setY(Math.sin(2 * Math.PI*frequency*time)*amplitude);
 		if(continueMoving)
-			Masses.get(0).setY(Math.sin(frequency*time)*amplitude);
+			Masses.get(0).setY(Masses.get(0).yInit + Math.sin(frequency*time)*amplitude);
 		if(roundYurd(Masses.get(0).getY()) == 0) {
 			count++;
 			if(count >= 3) {
