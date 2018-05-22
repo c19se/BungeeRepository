@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 
 import org.opensourcephysics.frames.PlotFrame;
@@ -83,24 +84,35 @@ public class Chord {
 			Masses = new ArrayList<Particle>();
 			Springs = new ArrayList<Spring>();
 			double theta = Math.PI/2;
-			Masses.add(new Particle(springMass, timeStep, x+(radius*Math.cos(theta)), y + (radius*Math.sin(theta)) )); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
+			//Masses.add(new Particle(springMass, timeStep, x+(radius*Math.cos(theta)), y + (radius*Math.sin(theta)) )); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
+			Masses.add(new Particle(springMass, timeStep, x+(radius*Math.cos(theta)), y+(radius*Math.sin(theta))));
 			pFrame.addDrawable(Masses.get(0)); //adds the individual particle
 			
+			
+			
 			pFrame.setVisible(true);
-			for(int i = 0; i < numSprings-1; i++) {
-				theta += 2*Math.PI/(numSprings-1);
-				Masses.add(new Particle(springMass, timeStep, x+(radius*Math.cos(theta)), y + (radius*Math.sin(theta)))); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
+			for(int i = 1; i < numSprings; i++) {
+				System.out.println(i);
+				theta += 2*Math.PI/(numSprings);
+				System.out.println(theta);
+				Masses.add(new Particle(springMass, timeStep, x + (radius*Math.cos(theta)), y + (radius*Math.sin(theta)))); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
 				pFrame.addDrawable(Masses.get(i)); //adds the individual particle to the frame
-				Spring s = new Spring((length), K, Masses.get(i),Masses.get(i+1)); //creates a new spring to go along with each particle
+				Spring s = new Spring((length), K, Masses.get(i-1),Masses.get(i)); //creates a new spring to go along with each particle
 				this.Springs.add(s); //adds the spring to the arrayList of springs 
 			}
-			Spring s = new Spring((length), K, Masses.get(Masses.size()-1),Masses.get(0)); //creates a new spring to go along with each particle
+			pFrame.addDrawable(Masses.get(Masses.size()-1));
+			
+			Masses.get(0).color = Color.GREEN;
+			Masses.get(Masses.size()-1).color = Color.BLUE;
+			
+			Spring s = new Spring((length), K, Masses.get(Masses.size()-1), Masses.get(0)); //creates a new spring to go along with each particle
 			this.Springs.add(s);
+			
 			continueMoving = true;
+			
+			System.out.println(Masses.size());
+			System.out.println(Springs.size());
 		}
-
-		
-		
 	}
 
 	//first of three update functions - this one updates all of the springs in the arrayList of springs
@@ -113,6 +125,13 @@ public class Chord {
 	int count = 0;
 	boolean continueMoving;
 	//next update function updates all of the particles
+	public void updatePosition() {
+		for(int i = 1; i < Masses.size(); i++) {
+			//if(i!=49)
+			Masses.get(i).updatePosition();
+		}
+	}
+	
 	public void updateParticles() {
 		//		Masses.get(0).setY(Math.sin(2 * Math.PI*frequency*time)*amplitude);
 		if(continueMoving||shape.toLowerCase().equals("circle"))
@@ -125,14 +144,13 @@ public class Chord {
 		}
 
 		//for each of the particles, it will call the update function in the particle class 
-		for(int i = 1; i < Masses.size()-1; i++) {
+		for(int i = 1; i < Masses.size(); i++) {
+			//if(i!=49)
 			Masses.get(i).updateAcc();
 		}
-		for(int i = 1; i < Masses.size()-1; i++) {
+		for(int i = 1; i < Masses.size(); i++) {
+			//if(i!=49)
 			Masses.get(i).updateVelocity();
-		}
-		for(int i = 1; i < Masses.size()-1; i++) {
-			Masses.get(i).updatePosition();
 		}
 	}
 	public double roundYurd(double num) {
@@ -144,8 +162,9 @@ public class Chord {
 	//this is the master update function
 	public void update(){
 		this.time += this.timeStep;
-		this.updateParticles(); //gets the new displacement of the particles first so that we can properly evaluate the new forces of the springs
 		this.updateSprings();
+		this.updateParticles(); //gets the new displacement of the particles first so that we can properly evaluate the new forces of the springs
+		this.updatePosition();
 	}
 }
 

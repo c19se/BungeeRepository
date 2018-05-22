@@ -5,6 +5,9 @@ public class Spring extends Force {
 	//vairable initialization:
 	double length;
 	double K;
+	double initialDistancex;
+	double initialDistancey;
+	
 	//constructor:
 	//leaves room for the two particles above and below the spring 
 	public Spring(double length, double K, Particle... particles) {
@@ -15,6 +18,9 @@ public class Spring extends Force {
 		}
 		this.length = length;
 		this.K = K;
+		
+		initialDistancex = this.particles[0].xDistanceBetween(this.particles[1]);
+		initialDistancey = this.particles[0].yDistanceBetween(this.particles[1]);
 	}
 
 	//the update function 
@@ -34,10 +40,12 @@ public class Spring extends Force {
 	@Override
 	public double getXForce(Particle p) {
 		if(p.equals(this.particles[1])) {
-			return (this.getNewtons()*(p.xDistanceBetween(this.particles[0])/p.distanceBetween(this.particles[0])));
+			//return (this.getNewtons()*((p.xDistanceBetween(this.particles[0]) - initialDistancex)/p.distanceBetween(this.particles[0])))
+			return (this.getNewtons()*((p.xDistanceBetween(this.particles[0]))));
 		}
 		else if(p.equals(this.particles[0])){
-			return (this.getNewtons()*(p.xDistanceBetween(this.particles[1])/p.distanceBetween(this.particles[1])));
+			//return (this.getNewtons()*((p.xDistanceBetween(this.particles[1]) - initialDistancey)/p.distanceBetween(this.particles[1])));
+			return (this.getNewtons()*((p.xDistanceBetween(this.particles[1]))));
 		}
 		else return 0;
 	}

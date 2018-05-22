@@ -94,8 +94,11 @@ public class Simulation extends AbstractSimulation {
 		
 
 		//changes the frame
-		xyFrame.setPreferredMinMaxY(-2*amplitudeConstant, 2*amplitudeConstant);
-		xyFrame.setPreferredMinMaxX(x, x+length);
+//		xyFrame.setPreferredMinMaxY(-2*amplitudeConstant, 2*amplitudeConstant);
+//		xyFrame.setPreferredMinMaxX(x, x+length);
+		xyFrame.setPreferredMinMaxY(-1.5, 1.5);
+		xyFrame.setPreferredMinMaxX(-1.5, 1.5);
+		
 		boolean checkIfAmplitudeIsConstant = true;
 		if(checkIfAmplitudeIsConstant) {
 			Trail topLine = new Trail();

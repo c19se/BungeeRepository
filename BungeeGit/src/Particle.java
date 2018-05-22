@@ -44,8 +44,8 @@ public class Particle extends Coordinate{
 
 	}
 	public void updateVelocity() {
-		this.lastVy = this.Yv;
-		this.lastVx = this.Xv;
+		this.lastVy = this.Yv*.45;
+		this.lastVx = this.Xv*.45;
 		this.Yv += this.Ya*this.timeStep;	
 		this.Xv += this.Xa*this.timeStep;	
 	}
