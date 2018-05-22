@@ -40,12 +40,12 @@ public class Spring extends Force {
 	@Override
 	public double getXForce(Particle p) {
 		if(p.equals(this.particles[1])) {
-			//return (this.getNewtons()*((p.xDistanceBetween(this.particles[0]) - initialDistancex)/p.distanceBetween(this.particles[0])))
-			return (this.getNewtons()*((p.xDistanceBetween(this.particles[0]))));
+			return (this.getNewtons()*((p.xDistanceBetween(this.particles[0]))/p.distanceBetween(this.particles[0])));
+//			return (this.getNewtons()*((p.xDistanceBetween(this.particles[0]))));
 		}
 		else if(p.equals(this.particles[0])){
-			//return (this.getNewtons()*((p.xDistanceBetween(this.particles[1]) - initialDistancey)/p.distanceBetween(this.particles[1])));
-			return (this.getNewtons()*((p.xDistanceBetween(this.particles[1]))));
+			return (this.getNewtons()*((p.xDistanceBetween(this.particles[1]))/p.distanceBetween(this.particles[1])));
+//			return (this.getNewtons()*((p.xDistanceBetween(this.particles[1]))));
 		}
 		else return 0;
 	}

@@ -56,7 +56,7 @@ public class Chord {
 			for(int i = 0; i < numSprings-1; i++) {
 				Masses.add(new Particle(springMass, timeStep, x+(i+1)*(length), y)); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
 				pFrame.addDrawable(Masses.get(i)); //adds the individual particle to the frame
-				Spring s = new Spring((length), K, Masses.get(i),Masses.get(i+1)); //creates a new spring to go along with each particle
+				Spring s = new Spring((100*length), K, Masses.get(i),Masses.get(i+1)); //creates a new spring to go along with each particle
 				this.Springs.add(s); //adds the spring to the arrayList of springs 
 			}
 			Masses.get(Masses.size()-1).fixed = true;
@@ -97,7 +97,7 @@ public class Chord {
 				System.out.println(theta);
 				Masses.add(new Particle(springMass, timeStep, x + (radius*Math.cos(theta)), y + (radius*Math.sin(theta)))); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
 				pFrame.addDrawable(Masses.get(i)); //adds the individual particle to the frame
-				Spring s = new Spring((length), K, Masses.get(i-1),Masses.get(i)); //creates a new spring to go along with each particle
+				Spring s = new Spring((3*length), K, Masses.get(i-1),Masses.get(i)); //creates a new spring to go along with each particle
 				this.Springs.add(s); //adds the spring to the arrayList of springs 
 			}
 			pFrame.addDrawable(Masses.get(Masses.size()-1));
