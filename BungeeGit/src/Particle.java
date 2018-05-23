@@ -13,6 +13,7 @@ public class Particle extends Coordinate{
 	double Xv;
 	double Yv;
 
+	
 	double yInit;
 		
 	boolean fixed;
@@ -20,6 +21,8 @@ public class Particle extends Coordinate{
 	double timeStep;
 
 	double mass;
+	
+	double charge;
 	
 	List<Force> forces;
 	public Particle(double mass, double timeStep, double xInit, double yInit) {
@@ -50,8 +53,11 @@ public class Particle extends Coordinate{
 		this.Xv += this.Xa*this.timeStep;	
 	}
 	public void updatePosition() {
-		this.y += (this.Yv+this.lastVy)/2*this.timeStep;//uses rectangle rule
-		this.x += (this.Xv+this.lastVx)/2*this.timeStep;//uses rectangle rule
+//		this.y += (this.Yv+this.lastVy)/2*this.timeStep;//uses trapezoid rule
+		this.y += this.Yv *this.timeStep;//uses rectangle rule
+//		this.x += (this.Xv+this.lastVx)/2*this.timeStep;//uses trapezoid rule
+		this.x += this.Xv *this.timeStep;//uses rectangle rule
+
 
 	}	
 	public void Step() {

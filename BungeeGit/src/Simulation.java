@@ -48,17 +48,17 @@ public class Simulation extends AbstractSimulation {
 		control.setValue("y", 0);
 		control.setValue("Time Step", .000001);
 		control.setValue("Number of Springs", 100);
-//		control.setValue("K", 1.23e7);
-		control.setValue("Mass of bungee cord", .15);
+		//		control.setValue("K", 1.23e7);
+		control.setValue("Mass of bungee cord", .015);
 		control.setValue("Length of bungee", 1);
 		control.setValue("amplitude", .01);
-//		control.setValue("frequency", 314.159265359);
+		//		control.setValue("frequency", 314.159265359);
 		control.setValue("tension", 100);
-		control.setValue("shape", "circle");
+		control.setValue("shape", "String");
 
 		xyFrame.clearData();
 		this.setDelayTime(1);
-//		this.stepsPerDisplay = 1000;
+		//		this.stepsPerDisplay = 1000;
 	}
 
 	//parameters for our bungee cord 
@@ -85,20 +85,26 @@ public class Simulation extends AbstractSimulation {
 		x =  control.getDouble("x");
 		y = control.getDouble("y");
 		amplitudeConstant = control.getDouble("amplitude");
-//		frequency = control.getDouble("frequency");
+		//		frequency = control.getDouble("frequency");
 		k = tension/(length/numSprings);
 		frequency = Math.sqrt(tension*length/mass)/(2*length);
 		shape = control.getString("shape");
-		
-		
-		
+
+
+
 
 		//changes the frame
-//		xyFrame.setPreferredMinMaxY(-2*amplitudeConstant, 2*amplitudeConstant);
-//		xyFrame.setPreferredMinMaxX(x, x+length);
-		xyFrame.setPreferredMinMaxY(-1.5, 1.5);
-		xyFrame.setPreferredMinMaxX(-1.5, 1.5);
+		if(shape.toLowerCase().equals("string")) {
+			xyFrame.setPreferredMinMaxY(-2*amplitudeConstant, 2*amplitudeConstant);
+			xyFrame.setPreferredMinMaxX(x, x+length);
+		}
+		else {
+			double radius = length/Math.PI/2;
+			xyFrame.setPreferredMinMaxY(y-radius, y+radius);
+			xyFrame.setPreferredMinMaxX(x-radius, x+radius);
+		}
 		
+
 		boolean checkIfAmplitudeIsConstant = true;
 		if(checkIfAmplitudeIsConstant) {
 			Trail topLine = new Trail();

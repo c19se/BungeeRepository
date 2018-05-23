@@ -26,4 +26,7 @@ public abstract class Force {
 	public void setRadians(double Radians) {
 		radians = Radians;
 	}
+	public void update() {
+		Newtons = Newtons;
+	}
 }
