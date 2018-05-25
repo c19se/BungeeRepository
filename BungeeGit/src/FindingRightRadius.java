@@ -17,8 +17,8 @@ import org.opensourcephysics.frames.*;   //needed to use a DisplayFrame
  * recommended when running our simulation
  *
  */
-public class Simulation extends AbstractSimulation {
-	public Simulation() {
+public class FindingRightRadius extends AbstractSimulation {
+	public FindingRightRadius() {
 
 	}
 	int i = 0;
@@ -37,6 +37,7 @@ public class Simulation extends AbstractSimulation {
 	protected void doStep() {
 		for(int i = 0; i < 3000; i++)
 			cord.update();
+		System.out.println(cord.Masses.get(25).Xa);
 	}
 
 	//our reset function 
@@ -52,10 +53,12 @@ public class Simulation extends AbstractSimulation {
 		control.setValue("Mass of bungee cord", .15);
 		control.setValue("Length of bungee", 3);
 		control.setValue("amplitude", .1);
-		control.setValue("frequency", 55);
+		//		control.setValue("frequency", 314.159265359);
 		control.setValue("tension", 100);
-		control.setValue("shape", "cstring");
-		control.setValue("k", 1e6);
+		control.setValue("radius multiplier", 1.30655847);
+		control.setValue("k", 1e5);
+		control.setValue("frequency", 55);
+
 
 		xyFrame.clearData();
 		this.setDelayTime(1);
@@ -73,7 +76,7 @@ public class Simulation extends AbstractSimulation {
 	double amplitudeConstant;
 	double frequency;
 	double tension;
-	String shape;
+	double radiusMultiplier;
 
 	//our initialize function
 	public void initialize() {
@@ -86,38 +89,21 @@ public class Simulation extends AbstractSimulation {
 		x =  control.getDouble("x");
 		y = control.getDouble("y");
 		amplitudeConstant = control.getDouble("amplitude");
+		//		frequency = control.getDouble("frequency");
 		k = control.getDouble("k");
-
-		//Fundamental Frequency 
-//		frequency = Math.sqrt(tension*length/mass)/(2*length);
 		frequency = control.getDouble("frequency");
+		
 
-		shape = control.getString("shape");
+		radiusMultiplier = control.getDouble("radius multiplier");
 
 
 
 
-		//changes the frame
-		if(shape.toLowerCase().equals("string")||shape.toLowerCase().equals("cstring")) {
-			xyFrame.setPreferredMinMaxY(-2*amplitudeConstant, 2*amplitudeConstant);
-			xyFrame.setPreferredMinMaxX(x, x+length);
-			boolean checkIfAmplitudeIsConstant = true;
-			if(checkIfAmplitudeIsConstant) {
-				Trail topLine = new Trail();
-				Trail bottomLine = new Trail();
-				topLine.addPoint(x, y+amplitudeConstant);
-				topLine.addPoint(x+length, y+amplitudeConstant);
-				bottomLine.addPoint(x, y-amplitudeConstant);
-				bottomLine.addPoint(x+length, y-amplitudeConstant);
-				xyFrame.addDrawable(topLine);
-				xyFrame.addDrawable(bottomLine);
-			}
-		}
-		else {
-			double radius = length/Math.PI/2;
+	
+			double radius = radiusMultiplier*length/Math.PI/2;
 			xyFrame.setPreferredMinMaxY(y-1.3*radius, y+1.3*radius);
 			xyFrame.setPreferredMinMaxX(x-1.3*radius, x+1.3*radius);
-		}
+		
 
 
 
@@ -125,12 +111,12 @@ public class Simulation extends AbstractSimulation {
 		//clears everything from the frame again 
 		xyFrame.clearData();
 		//initializes our bungee cord 
-		cord = new Chord(shape, numSprings, length, k, mass, timeStep, xyFrame, x, y, amplitudeConstant, frequency, tension);
+		cord = new Chord(radiusMultiplier, numSprings, length, k, mass, timeStep, xyFrame, x, y, amplitudeConstant, frequency);
 	}
 
 	public static void main(String[] args) {
 		//Creating a new simulation 
-		SimulationControl.createApp(new Simulation());
+		SimulationControl.createApp(new FindingRightRadius());
 
 	}
 }
