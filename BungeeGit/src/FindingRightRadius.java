@@ -37,7 +37,7 @@ public class FindingRightRadius extends AbstractSimulation {
 	protected void doStep() {
 		for(int i = 0; i < 3000; i++)
 			cord.update();
-		System.out.println(cord.Masses.get(25).Xa);
+		// System.out.println(cord.Masses.get(25).Xa);
 	}
 
 	//our reset function 
@@ -47,17 +47,17 @@ public class FindingRightRadius extends AbstractSimulation {
 		//initializes all of the variable prompts 
 		control.setValue("x", 0);
 		control.setValue("y", 0);
-		control.setValue("Time Step", .000001);
+		control.setValue("Time Step", .0000001);
 		control.setValue("Number of Springs", 100);
 		//		control.setValue("K", 1.23e7);
 		control.setValue("Mass of bungee cord", .15);
 		control.setValue("Length of bungee", 3);
-		control.setValue("amplitude", .1);
+		control.setValue("amplitude", .01);
 		//		control.setValue("frequency", 314.159265359);
 		control.setValue("tension", 100);
 		control.setValue("radius multiplier", 1.30655847);
 		control.setValue("k", 1e5);
-		control.setValue("frequency", 55);
+		control.setValue("frequency", 2000);
 
 
 		xyFrame.clearData();
@@ -92,18 +92,18 @@ public class FindingRightRadius extends AbstractSimulation {
 		//		frequency = control.getDouble("frequency");
 		k = control.getDouble("k");
 		frequency = control.getDouble("frequency");
-		
+
 
 		radiusMultiplier = control.getDouble("radius multiplier");
 
 
 
 
-	
-			double radius = radiusMultiplier*length/Math.PI/2;
-			xyFrame.setPreferredMinMaxY(y-1.3*radius, y+1.3*radius);
-			xyFrame.setPreferredMinMaxX(x-1.3*radius, x+1.3*radius);
-		
+
+		double radius = radiusMultiplier*length/Math.PI/2;
+		xyFrame.setPreferredMinMaxY(y-1.3*radius, y+1.3*radius);
+		xyFrame.setPreferredMinMaxX(x-1.3*radius, x+1.3*radius);
+
 
 
 

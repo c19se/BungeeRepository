@@ -91,10 +91,10 @@ public class Chord {
 				Masses.add(new Particle(springMass, timeStep, x + (radius*Math.cos(theta)), y + (radius*Math.sin(theta)))); //adds a new particle for the amount specified by the user, each particle is identical and varies only in position
 				pFrame.addDrawable(Masses.get(i)); //adds the individual particle to the frame
 				theta += 2*Math.PI/(numSprings);
-				
+
 			}
 			pFrame.setVisible(true);
-			
+
 			Particle[] ps = new Particle[2];
 
 			ps[0] = new Particle(0, timeStep, x, y);
@@ -102,7 +102,7 @@ public class Chord {
 			for(int i = 0; i < numSprings-1; i++) {
 				ps[1] = Masses.get(i);
 				ps[1].charge = .0001;
-//				System.out.println(Masses.get(i).distanceBetween(Masses.get(i+1)));
+				//				System.out.println(Masses.get(i).distanceBetween(Masses.get(i+1)));
 				Spring s = new Spring(lengthPerSpring-dX, K, Masses.get(i),Masses.get(i+1)); //creates a new spring to go along with each particle
 				this.Forces.add(s); //adds the spring to the arrayList of springs 
 				Forces.add(new ElectricalForce(ps.clone()));
@@ -110,7 +110,7 @@ public class Chord {
 
 			ps[1]=Masses.get(Masses.size()-1);
 			ps[1].charge = .0001;
-//			ps[1].charge = 00001;
+			//			ps[1].charge = 00001;
 
 			Forces.add(new ElectricalForce(ps.clone()));
 			pFrame.addDrawable(Masses.get(Masses.size()-1));
@@ -120,15 +120,14 @@ public class Chord {
 
 			Spring s = new Spring(lengthPerSpring-dX, K, Masses.get(Masses.size()-1), Masses.get(0)); //creates a new spring to go along with each particle
 			this.Forces.add(s);
-			
+
 			moveAll= false;
 		}
 	}
-	
+
 	public Chord(double radiusMultiple, double numSprings, double length, double K, double mass, double timeStep, PlotFrame pFrame, double x, double y, double amplitude, double frequency) {//mass is the mass of each individual spring. Not really tho, the particles next to each. Same ish wit da K
 		this.shape = "charged circle";
 
-	
 		double radius = radiusMultiple*length/Math.PI/2;
 		//finds the specified precision based on the user input, type: string
 		this.timeStep = timeStep;
@@ -144,9 +143,9 @@ public class Chord {
 		Forces = new ArrayList<Force>();
 		double theta = Math.PI/2;
 
-		
+
 		double springMass = mass/numSprings;
-		
+
 		double dX = tension/k;
 
 		pFrame.setVisible(true);
@@ -170,7 +169,7 @@ public class Chord {
 
 		ps[1]=Masses.get(Masses.size()-1);
 		ps[1].charge = .00005;
-//		ps[1].charge = .00005;
+		//		ps[1].charge = .00005;
 
 		Forces.add(new ElectricalForce(ps.clone()));
 		pFrame.addDrawable(Masses.get(Masses.size()-1));
@@ -206,16 +205,16 @@ public class Chord {
 
 	public void updateParticles() {
 		//		Masses.get(0).setY(Math.sin(2 * Math.PI*frequency*time)*amplitude);
-		if(Math.abs(Masses.get(0).getY()-  amplitude) < .00000001 ) {
+		if(Math.abs(Masses.get(0).getY() -  amplitude) < .00000001 ) {
 			hitOne = true;
-			System.out.println("hit one");
+			//			System.out.println("hit one");
 		}else if(Math.abs(Masses.get(0).getY() + amplitude )< .00000001) {
 			hitNegOne = true;
-			System.out.println("hit negative one");
+			//			System.out.println("hit negative one");
 		}
 
 		if(shape.toLowerCase().equals("circle")||(shape.toLowerCase().equals("string")&&continueMoving) || moveTopAsWave || shape.toLowerCase().equals("cstring"))
-			Masses.get(0).setY(Masses.get(0).yInit + Math.sin(2*frequency*time)*amplitude);
+			Masses.get(0).setY(Masses.get(0).yInit + Math.sin(frequency*time)*amplitude);
 
 		if(continueMoving && roundYurd(Masses.get(0).getY()) == 0 && hitOne && hitNegOne) {
 

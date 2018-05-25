@@ -52,7 +52,7 @@ public class Simulation extends AbstractSimulation {
 		control.setValue("Mass of bungee cord", .15);
 		control.setValue("Length of bungee", 3);
 		control.setValue("amplitude", .1);
-		control.setValue("frequency", 55);
+		control.setValue("frequency", 105.8);
 		control.setValue("tension", 100);
 		control.setValue("shape", "cstring");
 		control.setValue("k", 1e6);
@@ -91,6 +91,7 @@ public class Simulation extends AbstractSimulation {
 		//Fundamental Frequency 
 //		frequency = Math.sqrt(tension*length/mass)/(2*length);
 		frequency = control.getDouble("frequency");
+//		frequency = Math.sqrt(tension/(mass/length))/(2*length);
 
 		shape = control.getString("shape");
 
