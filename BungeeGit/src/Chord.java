@@ -214,6 +214,8 @@ public class Chord {
 		}
 
 		if(shape.toLowerCase().equals("circle")||(shape.toLowerCase().equals("string")&&continueMoving) || moveTopAsWave || shape.toLowerCase().equals("cstring"))
+//			Masses.get(0).setY(Masses.get(0).yInit + Math.sin(frequency*time)*amplitude + Math.sin(.515*frequency*time)*amplitude);
+//			Masses.get(0).setY(Masses.get(0).yInit + Math.sin(frequency*time)*amplitude + Math.sin(1015/2000*frequency*time)*amplitude);
 			Masses.get(0).setY(Masses.get(0).yInit + Math.sin(frequency*time)*amplitude);
 
 		if(continueMoving && roundYurd(Masses.get(0).getY()) == 0 && hitOne && hitNegOne) {
